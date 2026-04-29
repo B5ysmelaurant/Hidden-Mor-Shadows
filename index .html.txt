@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Emerald Rituals</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    background: #0b2e24;
+    color: #f8f8f5;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* PARTICLES */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* NAV */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px 50px;
+    position: fixed;
+    width: 100%;
+    background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+}
+
+.nav a {
+    color: #f5e6cc;
+    margin-left: 25px;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background: radial-gradient(circle at center, #1d4d3b, #0b2e24);
+}
+
+.hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    letter-spacing: 6px;
+    color: #f5e6cc;
+}
+
+.hero p {
+    max-width: 500px;
+    opacity: 0.8;
+}
+
+.btn {
+    margin-top: 30px;
+    padding: 14px 30px;
+    border: 1px solid #f5e6cc;
+    background: transparent;
+    color: #f5e6cc;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.btn:hover {
+    background: #f5e6cc;
+    color: #0b2e24;
+}
+
+/* SECTION */
+.section {
+    padding: 100px 60px;
+}
+
+.title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+}
+
+/* PRODUCTS */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+}
+
+.card {
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 30px rgba(156,175,136,0.2);
+}
+
+.card h3 {
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.price {
+    margin-top: 10px;
+    color: #9caf88;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 40px;
+    opacity: 0.5;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="nav">
+    <div>EMERALD RITUALS</div>
+    <div>
+        <a href="#">Shop</a>
+        <a href="#">Rituals</a>
+        <a href="#">Contact</a>
+    </div>
+</div>
+
+<div class="hero">
+    <h1>EMERALD RITUALS</h1>
+    <p>Ethereal tools for intention, manifestation, and unseen energy.</p>
+    <button class="btn">ENTER SHOP</button>
+</div>
+
+<div class="section">
+    <div class="title">Featured Rituals</div>
+
+    <div class="grid">
+
+        <div class="card">
+            <h3>Spell Oils</h3>
+            <p>Charged botanical blends for manifestation.</p>
+            <div class="price">$18</div>
+        </div>
+
+        <div class="card">
+            <h3>Herbal Shower Bags</h3>
+            <p>Steam-infused cleansing rituals.</p>
+            <div class="price">$15</div>
+        </div>
+
+        <div class="card">
+            <h3>Spiritual Perfumes</h3>
+            <p>Subtle scents aligned with intention.</p>
+            <div class="price">$25</div>
+        </div>
+
+        <div class="card">
+            <h3>Ritual Candles</h3>
+            <p>Hand-poured for energy work.</p>
+            <div class="price">$20</div>
+        </div>
+
+        <div class="card">
+            <h3>Roller Oils</h3>
+            <p>Portable aura enhancers.</p>
+            <div class="price">$12</div>
+        </div>
+
+    </div>
+</div>
+
+<div class="footer">
+    Energy flows where intention goes.
+</div>
+
+<script>
+// PARTICLES
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 80; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2,
+        d: Math.random() * 1
+    });
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "rgba(156,175,136,0.5)";
+
+    particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+    });
+
+    update();
+}
+
+function update() {
+    particles.forEach(p => {
+        p.y += p.d;
+        if (p.y > canvas.height) {
+            p.y = 0;
+            p.x = Math.random() * canvas.width;
+        }
+    });
+}
+
+setInterval(draw, 30);
+</script>
+
+</body>
+</html>
